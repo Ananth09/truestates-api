@@ -6,14 +6,9 @@ from datetime import datetime, timedelta
 from statsmodels.nonparametric.smoothers_lowess import lowess
 
 # --- CONFIGURATION CONSTANTS ---
-# OHE_FILE = 'C:/Users/anant/OneDrive/Desktop/truEstates/Modular_forecast_code/onehot_encoder.pkl'
-# COLUMNS_FILE = 'C:/Users/anant/OneDrive/Desktop/truEstates/Modular_forecast_code/train_columns.pkl'
-# TRAINING_DATA_FILE = 'C:/Users/anant/OneDrive/Desktop/truEstates/Modular_forecast_code/df_trained_dataset_6000.csv'
-# FORECAST_DATA_FILE = 'C:/Users/anant/OneDrive/Desktop/truEstates/Modular_forecast_code/Sarima_forecast_6M.csv'
 LOESS_FRAC = 0.1
 LOESS_IT = 3
 DATE_FORMAT = '%d-%m-%Y' # Standard DD-MM-YYYY format, like 01-01-2025
-# BASE_MODEL_DIR = "C:/Users/anant/OneDrive/Desktop/truEstates/Modular_forecast_code/area_models/"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -23,7 +18,6 @@ TRAINING_DATA_FILE = os.path.join(BASE_DIR, "df_trained_dataset_6000.csv")
 FORECAST_DATA_FILE = os.path.join(BASE_DIR, "Sarima_forecast_6M.csv")
 
 BASE_MODEL_DIR = os.path.join(BASE_DIR, "area_models")
-AREA_FILES = [os.path.join(BASE_MODEL_DIR, filename) for filename in AREA_MODEL_FILENAMES]
 
 
 
@@ -62,7 +56,7 @@ class PropertyPricePredictor:
     ]
 
     # Build full paths cleanly
-    AREA_FILES = [BASE_MODEL_DIR + filename for filename in AREA_MODEL_FILENAMES]
+    AREA_FILES = [os.path.join(BASE_MODEL_DIR, filename) for filename in AREA_MODEL_FILENAMES]
 
 
     def __init__(self):
